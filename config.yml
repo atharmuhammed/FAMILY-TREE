@@ -8,11 +8,12 @@ collections:
     label: "Family Member"
     folder: "data"
     create: true
-    slug: "{{slug}}" # This creates a unique URL for each person
+    slug: "{{slug}}"
     fields:
       - {label: "Name", name: "name", widget: "string"}
       - {label: "Photo", name: "photo", widget: "image"}
-      - {label: "Relation", name: "relation", widget: "select", options: ["Head", "Son", "Daughter", "Wife", "Husband", "Father", "Mother", "Brother", "Sister"]}
+      - {label: "Relation", name: "relation", widget: "string"} # Now you can type anything here!
       - {label: "Father Name", name: "father", widget: "string", required: false}
       - {label: "Mother Name", name: "mother", widget: "string", required: false}
       - {label: "Spouse Name", name: "spouse", widget: "string", required: false}
+      - {label: "Siblings", name: "siblings", widget: "list", required: false} # New: Add as many brothers/sisters as you want
