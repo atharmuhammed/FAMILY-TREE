@@ -1,32 +1,22 @@
 [
   {
     "id": 1,
-    "name": "Grandpa Name",
+    "name": "Your Grandfather Name",
     "dob": "1940-01-01",
-    "dod": "2020-01-01",
+    "dod": "",
     "photo": "grandpa.jpg",
-    "spouse": ["Grandma Name"],
-    "relation": "Head of Family",
-    "children": [2, 3]
+    "spouse": ["Grandmother Name"],
+    "relation": "Head",
+    "children": [2]
   },
   {
     "id": 2,
-    "name": "Son Name",
+    "name": "Father Name",
     "dob": "1965-05-05",
     "dod": "",
-    "photo": "son.jpg",
-    "spouse": ["Wife 1 Name", "Wife 2 Name"],
+    "photo": "father.jpg",
+    "spouse": ["Mother Name"],
     "relation": "Son",
-    "children": [4, 5]
-  },
-  {
-    "id": 3,
-    "name": "Daughter Name",
-    "dob": "1970-02-10",
-    "dod": "",
-    "photo": "daughter.jpg",
-    "spouse": ["Husband Name"],
-    "relation": "Daughter",
     "children": []
   }
 ]
