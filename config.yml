@@ -1,11 +1,8 @@
 backend:
   name: git-gateway
   branch: main
-  
-# These two lines were missing and caused the error
 media_folder: "static/images"
 public_folder: "images"
-
 collections:
   - name: "family"
     label: "Family Member"
@@ -15,4 +12,6 @@ collections:
     fields:
       - {label: "Name", name: "name", widget: "string"}
       - {label: "Photo", name: "photo", widget: "image"}
-      - {label: "Relation", name: "relation", widget: "select", options: ["Head", "Son", "Daughter", "Wife", "Husband"]}
+      - {label: "Father Name", name: "father", widget: "string", required: false}
+      - {label: "Mother Name", name: "mother", widget: "string", required: false}
+      - {label: "Relation", name: "relation", widget: "select", options: ["Head", "Son", "Daughter", "Wife", "Husband", "Father", "Mother", "Brother", "Sister"]}
