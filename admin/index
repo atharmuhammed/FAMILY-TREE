@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Family Tree</title>
+    <style>
+        body { font-family: sans-serif; text-align: center; padding: 20px; }
+        .card { border: 2px solid #ddd; padding: 20px; max-width: 400px; margin: auto; border-radius: 15px; }
+        img { width: 150px; height: 150px; object-fit: cover; border-radius: 50%; }
+        a { display: block; margin: 10px; color: blue; text-decoration: none; }
+    </style>
+</head>
+<body>
+    <div id="root">Loading your family tree...</div>
+
+    <script>
+        async function loadData() {
+            const root = document.getElementById('root');
+            const urlParams = new URLSearchParams(window.location.search);
+            const targetName = urlParams.get('name');
+
+            try {
+                // Fetch the list of family members
+                const response = await fetch('data/family.json'); 
+                const family = await response.json();
+
+                // If no name in URL, show the 'Head'
+                const person = targetName ? family.find(p => p.name === targetName) : family.find(p => p.relation === 'Head');
+
+                if (!person) { root.innerHTML = "<h1>Person not found</h1>"; return; }
+
+                // Display Person
+                root.innerHTML = `
+                    <div class="card">
+                        <img src="${person.photo}">
+                        <h1>${person.name}</h1>
+                        <p>Relation: ${person.relation}</p>
+                        <p>Father: ${person.father || 'N/A'}</p>
+                        <p>Mother: ${person.mother || 'N/A'}</p>
+                        <p>Spouse: ${person.spouse || 'N/A'}</p>
+                    </div>
+                    <h3>Relatives:</h3>
+                    ${family.filter(p => p.father === person.name || p.mother === person.name)
+                            .map(child => `<a href="?name=${child.name}">View ${child.name}</a>`).join('')}
+                    <a href="index.html">Back to Home</a>
+                `;
+            } catch (e) {
+                root.innerHTML = "<h1>Waiting for data...</h1><p>Ensure your family_data.json exists in /data and is valid JSON.</p>";
+            }
+        }
+        loadData();
+    </script>
+</body>
+</html>
