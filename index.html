@@ -1,18 +1,50 @@
 <!DOCTYPE html>
 <html>
+<head>
+    <title>Family Tree</title>
+    <style>
+        .profile { border: 2px solid #333; padding: 20px; text-align: center; max-width: 400px; margin: auto; }
+        .relatives { margin-top: 20px; display: flex; justify-content: space-around; }
+    </style>
+</head>
 <body>
-    <h1>Our Family Tree</h1>
-    <div id="tree-container"></div>
+    <div id="app">Loading Profile...</div>
 
     <script>
-        // This script fetches all your data files and displays them
-        async function buildTree() {
-            const container = document.getElementById('tree-container');
-            // This is a placeholder; you will need to point this to your 
-            // folder of JSON files once you have them.
-            container.innerHTML = "<p>Data is saved in GitHub. We are now configuring the display!</p>";
+        async function loadProfile() {
+            // Get the name from the URL (e.g., index.html?name=Abdul)
+            const urlParams = new URLSearchParams(window.location.search);
+            const personName = urlParams.get('name');
+            const app = document.getElementById('app');
+
+            // Fetch the JSON list of your family
+            const response = await fetch('data/family.json'); 
+            const data = await response.json();
+            
+            // Find the person
+            const person = data.find(p => p.name === personName);
+
+            if (!person) {
+                app.innerHTML = "<h1>Family Members</h1><ul>" + 
+                    data.map(p => `<li><a href="?name=${p.name}">${p.name}</a></li>`).join('') + "</ul>";
+                return;
+            }
+
+            // Draw the profile
+            app.innerHTML = `
+                <div class="profile">
+                    <img src="${person.photo}" width="200"><br>
+                    <h1>${person.name}</h1>
+                    <p>Relation: ${person.relation}</p>
+                    <p>Spouse: ${person.spouse || 'None'}</p>
+                    <div class="relatives">
+                        <p>Father: ${person.father || 'N/A'}</p>
+                        <p>Mother: ${person.mother || 'N/A'}</p>
+                    </div>
+                </div>
+            `;
         }
-        buildTree();
+        loadProfile();
     </script>
 </body>
 </html>
