@@ -1,36 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Family Tree</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Family Tree Admin</title>
+  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
 </head>
 <body>
-    <h1>Our Family Tree</h1>
-    <div id="tree-container"></div>
-    <script>
-        // We will fetch the list of files from the data folder
-        // Since Decap CMS creates individual JSON files, we try to load them
-        async function loadFamily() {
-            const container = document.getElementById('tree-container');
-            try {
-                // This is a simplified way to list data if you have multiple files
-                // For now, let's assume you have one main file for testing
-                const response = await fetch('data/family.json'); 
-                const data = await response.json();
-                
-                container.innerHTML = ""; // Clear loading text
-                data.forEach(member => {
-                    container.innerHTML += `
-                        <div style="border:1px solid #ccc; padding:10px; margin:10px; width:200px;">
-                            <h3>${member.name}</h3>
-                            <p>Relation: ${member.relation}</p>
-                        </div>`;
-                });
-            } catch (e) {
-                container.innerHTML = "<p>Data not found yet. Please ensure you have added a member in /admin and clicked Publish.</p>";
-                console.log("Error:", e);
-            }
-        }
-        loadFamily();
-    </script>
-</body>
+  </body>
 </html>
