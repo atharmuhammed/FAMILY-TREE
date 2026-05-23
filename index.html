@@ -6,33 +6,27 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
     <style>
         body { font-family: 'Segoe UI', sans-serif; padding: 20px; background: #f4f4f9; }
-        h1 { text-align: center; color: #333; }
-        
-        /* This container forces the cards to sit in a grid/flowchart layout */
-        #tree-container { 
-            display: flex; 
-            flex-wrap: wrap; 
-            justify-content: center; 
-            gap: 20px; 
-            padding-top: 20px;
-        }
+        .tree-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; }
         
         .card { 
             background: white; 
-            border: 1px solid #ddd; 
+            border: 2px solid #3498db; /* Professional blue border */
             padding: 20px; 
             width: 250px; 
-            border-radius: 15px; 
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            border-radius: 12px; 
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
             text-align: center;
         }
-        .card h3 { color: #2c3e50; margin: 0 0 10px 0; }
+        
+        .card h3 { margin: 0 0 10px 0; color: #2c3e50; }
         .card a { color: #3498db; text-decoration: none; font-weight: bold; }
-        .bio { font-size: 0.9em; color: #7f8c8d; margin: 10px 0; }
+        
+        .card-details { font-size: 0.85em; color: #555; margin-top: 10px; border-top: 1px solid #eee; padding-top: 10px; }
+        .dates { font-size: 0.8em; color: #888; font-style: italic; }
     </style>
 </head>
 <body>
-    <h1>Family Tree</h1>
+    <h1 style="text-align: center;">Family Tree</h1>
     <div id="tree-container" class="tree-container"></div>
     <script src="script.js"></script>
 </body>
