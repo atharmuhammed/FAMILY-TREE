@@ -6,13 +6,13 @@ media_folder: "assets"
 public_folder: "/assets"
 
 collections:
-  - name: "family_members"
+  - name: "family"
     label: "Family Members"
     folder: "content/members"
     create: true
     slug: "{{slug}}"
     fields:
       - {label: "Name", name: "name", widget: "string"}
-      - {label: "Birth Date", name: "date", widget: "datetime"}
-      - {label: "Image", name: "image", widget: "image"}
-      - {label: "Bio", name: "body", widget: "markdown"}
+      - {label: "Spouse", name: "spouse", widget: "string", required: false}
+      - {label: "Children (List)", name: "children", widget: "list", field: {label: "Child Name", name: "child", widget: "string"}}
+      - {label: "Biography", name: "body", widget: "markdown"}
