@@ -1,21 +1,36 @@
-<script>
-    // Fetch the data from the 'data' folder
-    fetch('data/family.json') 
-        .then(response => {
-            if (!response.ok) throw new Error("Could not find family data file.");
-            return response.json();
-        })
-        .then(data => {
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Family Tree</title>
+</head>
+<body>
+    <h1>Our Family Tree</h1>
+    <div id="tree-container"></div>
+    <script>
+        // We will fetch the list of files from the data folder
+        // Since Decap CMS creates individual JSON files, we try to load them
+        async function loadFamily() {
             const container = document.getElementById('tree-container');
-            if (data.length === 0) {
-                container.innerHTML = "<p>No family members found. Add some in the Admin panel!</p>";
-            } else {
+            try {
+                // This is a simplified way to list data if you have multiple files
+                // For now, let's assume you have one main file for testing
+                const response = await fetch('data/family.json'); 
+                const data = await response.json();
+                
+                container.innerHTML = ""; // Clear loading text
                 data.forEach(member => {
-                    container.innerHTML += `<div><h3>${member.name}</h3><p>${member.relation}</p></div>`;
+                    container.innerHTML += `
+                        <div style="border:1px solid #ccc; padding:10px; margin:10px; width:200px;">
+                            <h3>${member.name}</h3>
+                            <p>Relation: ${member.relation}</p>
+                        </div>`;
                 });
+            } catch (e) {
+                container.innerHTML = "<p>Data not found yet. Please ensure you have added a member in /admin and clicked Publish.</p>";
+                console.log("Error:", e);
             }
-        })
-        .catch(err => {
-            document.getElementById('tree-container').innerHTML = "<p>Error loading data: " + err.message + "</p>";
-        });
-</script>
+        }
+        loadFamily();
+    </script>
+</body>
+</html>
