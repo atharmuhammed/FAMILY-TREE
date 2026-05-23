@@ -1,21 +1,21 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Family Tree</title>
-    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-</head>
-<body>
-    <h1>Our Family Tree</h1>
-    <div id="tree-container"></div>
-    <script>
-        fetch('data/family.json') // This looks for your data
-            .then(response => response.json())
-            .then(data => {
-                const container = document.getElementById('tree-container');
+<script>
+    // Fetch the data from the 'data' folder
+    fetch('data/family.json') 
+        .then(response => {
+            if (!response.ok) throw new Error("Could not find family data file.");
+            return response.json();
+        })
+        .then(data => {
+            const container = document.getElementById('tree-container');
+            if (data.length === 0) {
+                container.innerHTML = "<p>No family members found. Add some in the Admin panel!</p>";
+            } else {
                 data.forEach(member => {
                     container.innerHTML += `<div><h3>${member.name}</h3><p>${member.relation}</p></div>`;
                 });
-            });
-    </script>
-</body>
-</html>
+            }
+        })
+        .catch(err => {
+            document.getElementById('tree-container').innerHTML = "<p>Error loading data: " + err.message + "</p>";
+        });
+</script>
