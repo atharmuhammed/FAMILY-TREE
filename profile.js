@@ -21,7 +21,7 @@ Papa.parse(csvUrl, {
         container.innerHTML = `
             <div class="top-row">
                 <div class="box"><h3>${person.NAME}</h3><p>Born: ${person['BORN DATE'] || 'N/A'}</p></div>
-                <div class="box"><h3>${person.SPOUSE || 'No Spouse'}</h3><p>Spouse</p></div>
+                <div class="box"><h3>${person['NAMES 1'] || 'No Spouse'}</h3><p>Spouse</p></div>
             </div>
             <h3>Children</h3>
             <div class="children-row" id="children-container"></div>
