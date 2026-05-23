@@ -1,39 +1,27 @@
-async function loadFamilyTree() {
-    const csvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQ5NHtG504CerQUBm-rCc1X90dmNTsx9JOzKi3uFvPWq3yXXtSUr38g-TFlAAR6gFsnvC-9LEGSANv3/pub?output=csv';
-    
-    try {
-        const response = await fetch(csvUrl);
-        const data = await response.text();
-        const rows = data.split('\n').slice(1);
-        
-        const container = document.getElementById('tree-container');
-        container.innerHTML = ''; 
-        
-        rows.forEach(row => {
-            // This regex is the "Gold Standard" for CSVs: 
-            // It correctly ignores commas that are trapped inside double-quotes
-            const cols = row.match(/(".*?"|[^",\s]+)(?=\s*,|\s*$)/g);
-            if (!cols || cols.length < 7) return;
-            
-            // Remove quotes from the data
-            const clean = cols.map(c => c.replace(/"/g, ''));
-            
-            const [name, spouse, born, death, children, father, mother] = clean;
-            
-            if (!name) return;
+const csvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQ5NHtG504CerQUBm-rCc1X90dmNTsx9JOzKi3uFvPWq3yXXtSUr38g-TFlAAR6gFsnvC-9LEGSANv3/pub?output=csv';
 
-            const card = document.createElement('div');
-            card.className = 'member-card';
-            card.innerHTML = `
-                <h3>${name} & ${spouse}</h3>
-                <p><strong>Parents:</strong> ${father} & ${mother}</p>
-                <p><strong>Bio:</strong> Born: ${born} | Died: ${death}</p>
-                <p><strong>Children:</strong> ${children}</p>
-            `;
-            container.appendChild(card);
-        });
-    } catch (error) {
-        console.error("Error loading family tree:", error);
-    }
+function loadFamilyTree() {
+    Papa.parse(csvUrl, {
+        download: true,
+        header: true, // This tells it the first row is your headers (Name, Spouse, etc.)
+        complete: function(results) {
+            const container = document.getElementById('tree-container');
+            container.innerHTML = '';
+            
+            results.data.forEach(row => {
+                // Now you can use the exact column names from your sheet!
+                const card = document.createElement('div');
+                card.className = 'member-card';
+                card.innerHTML = `
+                    <h3>${row.Name || 'N/A'} & ${row.Spouse || 'N/A'}</h3>
+                    <p><strong>Parents:</strong> ${row.Father || ''} & ${row.Mother || ''}</p>
+                    <p><strong>Bio:</strong> Born: ${row.Born || 'N/A'} | Died: ${row.Death || 'N/A'}</p>
+                    <p><strong>Children:</strong> ${row.Children || 'None'}</p>
+                `;
+                container.appendChild(card);
+            });
+        }
+    });
 }
+
 loadFamilyTree();
