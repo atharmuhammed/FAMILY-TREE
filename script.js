@@ -10,22 +10,25 @@ async function loadFamilyTree() {
         container.innerHTML = ''; 
         
         rows.forEach(row => {
-            // This line intelligently splits by comma, ignoring commas inside quotes
+            // This regex is the "Gold Standard" for CSVs: 
+            // It correctly ignores commas that are trapped inside double-quotes
             const cols = row.match(/(".*?"|[^",\s]+)(?=\s*,|\s*$)/g);
             if (!cols || cols.length < 7) return;
             
-            // Map columns (cleaning up potential quotes)
+            // Remove quotes from the data
             const clean = cols.map(c => c.replace(/"/g, ''));
             
             const [name, spouse, born, death, children, father, mother] = clean;
             
+            if (!name) return;
+
             const card = document.createElement('div');
             card.className = 'member-card';
             card.innerHTML = `
                 <h3>${name} & ${spouse}</h3>
                 <p><strong>Parents:</strong> ${father} & ${mother}</p>
                 <p><strong>Bio:</strong> Born: ${born} | Died: ${death}</p>
-                <p><strong>Children:</strong> ${children.replace(/;/g, ',')}</p>
+                <p><strong>Children:</strong> ${children}</p>
             `;
             container.appendChild(card);
         });
@@ -33,5 +36,4 @@ async function loadFamilyTree() {
         console.error("Error loading family tree:", error);
     }
 }
-
 loadFamilyTree();
