@@ -3,48 +3,50 @@
 <head>
     <title>Family Tree</title>
     <style>
-        .profile { border: 2px solid #333; padding: 20px; text-align: center; max-width: 400px; margin: auto; }
-        .relatives { margin-top: 20px; display: flex; justify-content: space-around; }
+        body { font-family: sans-serif; text-align: center; padding: 20px; }
+        .card { border: 2px solid #ddd; padding: 20px; max-width: 400px; margin: auto; border-radius: 10px; }
+        img { width: 150px; height: 150px; object-fit: cover; border-radius: 50%; }
+        .nav { margin-top: 20px; }
     </style>
 </head>
 <body>
-    <div id="app">Loading Profile...</div>
+    <div id="root">Loading your family tree...</div>
 
     <script>
-        async function loadProfile() {
-            // Get the name from the URL (e.g., index.html?name=Abdul)
+        // This function handles the logic of finding the right relative
+        async function renderPerson() {
             const urlParams = new URLSearchParams(window.location.search);
-            const personName = urlParams.get('name');
-            const app = document.getElementById('app');
+            const name = urlParams.get('name');
+            const root = document.getElementById('root');
 
-            // Fetch the JSON list of your family
+            // 1. Fetch your data
+            // Note: Since you use Decap, you will eventually need a way to fetch all files.
+            // For now, this assumes a single master file for testing.
             const response = await fetch('data/family.json'); 
-            const data = await response.json();
-            
-            // Find the person
-            const person = data.find(p => p.name === personName);
+            const family = await response.json();
+
+            const person = name ? family.find(p => p.name === name) : family.find(p => p.relation === 'Head');
 
             if (!person) {
-                app.innerHTML = "<h1>Family Members</h1><ul>" + 
-                    data.map(p => `<li><a href="?name=${p.name}">${p.name}</a></li>`).join('') + "</ul>";
+                root.innerHTML = "<h1>Family Tree</h1><p>Person not found.</p>";
                 return;
             }
 
-            // Draw the profile
-            app.innerHTML = `
-                <div class="profile">
-                    <img src="${person.photo}" width="200"><br>
+            // 2. Render the profile
+            root.innerHTML = `
+                <div class="card">
+                    <img src="${person.photo}">
                     <h1>${person.name}</h1>
-                    <p>Relation: ${person.relation}</p>
+                    <p>Role: ${person.relation}</p>
                     <p>Spouse: ${person.spouse || 'None'}</p>
-                    <div class="relatives">
-                        <p>Father: ${person.father || 'N/A'}</p>
-                        <p>Mother: ${person.mother || 'N/A'}</p>
-                    </div>
+                    <p>Father: ${person.father || 'N/A'} | Mother: ${person.mother || 'N/A'}</p>
+                </div>
+                <div class="nav">
+                    <button onclick="window.history.back()">Back</button>
                 </div>
             `;
         }
-        loadProfile();
+        renderPerson();
     </script>
 </body>
 </html>
