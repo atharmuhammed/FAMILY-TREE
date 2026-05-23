@@ -2,27 +2,23 @@ const csvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQ5NHtG504CerQUB
 
 function loadFamilyTree() {
     Papa.parse(csvUrl, {
-        download: true, 
-        header: true,
+        download: true, header: true,
         complete: function(results) {
             const container = document.getElementById('tree-container');
             if (!container) return;
             container.innerHTML = '';
             
             results.data.forEach(row => {
-                // FILTER: This prevents non-Level 1 people from appearing on the Home Page
-                if (row.Level !== "1") return;
-
-                // Ensure there is a name to display
+                // FILTER: Only show main (Level 1) people on Home Page
+                if (row.Level != "1") return;
                 if (!row.NAME) return;
 
                 const card = document.createElement('div');
                 card.className = 'card';
-                
                 card.innerHTML = `
                     <h3><a href="profile.html?name=${row.Slug}">${row.NAME}</a></h3>
                     <div class="card-details">
-                        <p><strong>Spouse:</strong> ${row['NAMES 1'] || 'N/A'}</p>
+                        <p><strong>Partner:</strong> ${row['NAMES 1'] || 'N/A'}</p>
                         <p><strong>Children:</strong> ${row.CHILDREN || 'None'}</p>
                         <div class="dates">
                             Born: ${row['BORN DATE'] || 'N/A'} <br>
@@ -32,12 +28,7 @@ function loadFamilyTree() {
                 `;
                 container.appendChild(card);
             });
-        },
-        error: function(err) {
-            console.error("Error loading CSV:", err);
         }
     });
 }
-
-// Initialize the tree
 loadFamilyTree();
