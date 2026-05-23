@@ -1,1 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Family Tree</title>
+    <style>
+        .member-card { border: 1px solid #ccc; padding: 10px; margin: 10px; width: 200px; display: inline-block; vertical-align: top; }
+        img { width: 100px; height: 100px; border-radius: 50%; }
+    </style>
+</head>
+<body>
+    <h1>Family Tree Viewer</h1>
+    <div id="tree"></div>
 
+    <script>
+        // This script loads the data and builds the cards
+        fetch('family_data.json')
+            .then(response => response.json())
+            .then(data => {
+                const container = document.getElementById('tree');
+                data.forEach(member => {
+                    container.innerHTML += `
+                        <div class="member-card">
+                            <img src="${member.photo}" alt="${member.name}">
+                            <h3>${member.name}</h3>
+                            <p>Born: ${member.dob}</p>
+                            <p>Died: ${member.dod || 'N/A'}</p>
+                        </div>
+                    `;
+                });
+            });
+    </script>
+</body>
+</html>
