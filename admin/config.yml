@@ -1,5 +1,6 @@
 backend:
-  name: git-gateway
+  name: github
+  repo: atharmuhammed/FAMILY-TREE # This tells the CMS exactly which repo to edit
   branch: main
 
 media_folder: "assets"
