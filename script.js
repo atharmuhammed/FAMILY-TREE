@@ -10,28 +10,22 @@ async function loadFamilyTree() {
         container.innerHTML = ''; 
         
         rows.forEach(row => {
-            // Split by comma
-            const cols = row.split(',');
-            if (cols.length < 7) return;
+            // This line intelligently splits by comma, ignoring commas inside quotes
+            const cols = row.match(/(".*?"|[^",\s]+)(?=\s*,|\s*$)/g);
+            if (!cols || cols.length < 7) return;
             
-            // Mapping your exact columns:
-            const name = cols[0];
-            const spouse = cols[1];
-            const born = cols[2];
-            const death = cols[3];
-            const children = cols[4];
-            const father = cols[5];
-            const mother = cols[6];
+            // Map columns (cleaning up potential quotes)
+            const clean = cols.map(c => c.replace(/"/g, ''));
             
-            if (!name) return;
-
+            const [name, spouse, born, death, children, father, mother] = clean;
+            
             const card = document.createElement('div');
             card.className = 'member-card';
             card.innerHTML = `
                 <h3>${name} & ${spouse}</h3>
                 <p><strong>Parents:</strong> ${father} & ${mother}</p>
                 <p><strong>Bio:</strong> Born: ${born} | Died: ${death}</p>
-                <p><strong>Children:</strong> ${children}</p>
+                <p><strong>Children:</strong> ${children.replace(/;/g, ',')}</p>
             `;
             container.appendChild(card);
         });
