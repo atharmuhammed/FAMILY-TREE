@@ -3,30 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Our Family Tree</title>
+    <title>Family Tree - Master Abdul Gaffar Sullia</title>
     <style>
         body { font-family: sans-serif; text-align: center; padding: 50px; background-color: #f4f4f9; }
         h1 { color: #333; }
-        .tree-container { margin-top: 30px; }
+        .tree-container { margin-top: 40px; }
         
-        /* Updated member style to look and act like a button */
-        .member { 
-            border: 2px solid #333; 
-            padding: 15px 25px; 
+        /* Highlighted style for the main ancestor */
+        .root-member { 
+            border: 3px solid #ffd700; 
+            padding: 20px 40px; 
             display: inline-block; 
-            margin: 10px; 
-            border-radius: 8px; 
-            background: white; 
+            border-radius: 12px; 
+            background: #fff8dc; 
             text-decoration: none; 
             color: #333; 
             font-weight: bold;
-            transition: background 0.3s;
+            font-size: 1.2em;
+            transition: transform 0.2s, background 0.3s;
         }
         
-        /* Adds a nice color change when you move your mouse over the button */
-        .member:hover { background: #e0e0e0; }
+        .root-member:hover { background: #ffe4b5; transform: scale(1.05); }
         
-        .admin-link { margin-top: 50px; display: block; color: #666; text-decoration: none; font-size: 0.9em; }
+        .admin-link { margin-top: 80px; display: block; color: #888; text-decoration: none; font-size: 0.8em; }
     </style>
 </head>
 <body>
@@ -34,9 +33,9 @@
     <h1>Welcome to Our Family Tree</h1>
     
     <div class="tree-container">
-        <a href="grandparent.html" class="member">Grandparent</a>
-        <a href="parent.html" class="member">Parent</a>
-        <a href="you.html" class="member">You</a>
+        <a href="abdul-gaffar.html" class="root-member">
+            Master Abdul Gaffar Sullia & Wife
+        </a>
     </div>
 
     <a href="admin/admin.html" class="admin-link">Access Admin Dashboard</a>
