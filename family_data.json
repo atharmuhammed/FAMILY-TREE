@@ -5,6 +5,8 @@
     "dob": "1940-01-01",
     "dod": "2020-01-01",
     "photo": "grandpa.jpg",
+    "spouse": ["Grandma Name"],
+    "relation": "Head of Family",
     "children": [2, 3]
   },
   {
@@ -13,6 +15,18 @@
     "dob": "1965-05-05",
     "dod": "",
     "photo": "son.jpg",
+    "spouse": ["Wife 1 Name", "Wife 2 Name"],
+    "relation": "Son",
+    "children": [4, 5]
+  },
+  {
+    "id": 3,
+    "name": "Daughter Name",
+    "dob": "1970-02-10",
+    "dod": "",
+    "photo": "daughter.jpg",
+    "spouse": ["Husband Name"],
+    "relation": "Daughter",
     "children": []
   }
 ]
