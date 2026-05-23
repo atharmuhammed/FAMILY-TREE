@@ -1,0 +1,13 @@
+backend:
+  name: git-gateway
+  branch: main
+collections:
+  - name: "family"
+    label: "Family Member"
+    folder: "data"
+    create: true
+    fields:
+      - {label: "Name", name: "name", widget: "string"}
+      - {label: "Photo", name: "photo", widget: "image"}
+      - {label: "Relation", name: "relation", widget: "select", options: ["Head", "Son", "Daughter", "Wife", "Husband"]}
+      - {label: "Birth Date", name: "dob", widget: "string"}
