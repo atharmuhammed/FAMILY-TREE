@@ -4,49 +4,37 @@
     <title>Family Tree</title>
     <style>
         body { font-family: sans-serif; text-align: center; padding: 20px; }
-        .card { border: 2px solid #ddd; padding: 20px; max-width: 400px; margin: auto; border-radius: 10px; }
-        img { width: 150px; height: 150px; object-fit: cover; border-radius: 50%; }
-        .nav { margin-top: 20px; }
+        .member-card { border: 1px solid #ccc; padding: 10px; margin: 10px; display: inline-block; width: 200px; }
     </style>
 </head>
 <body>
-    <div id="root">Loading your family tree...</div>
+    <h1>Our Family Tree</h1>
+    <div id="tree-container"></div>
 
     <script>
-        // This function handles the logic of finding the right relative
-        async function renderPerson() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const name = urlParams.get('name');
-            const root = document.getElementById('root');
-
-            // 1. Fetch your data
-            // Note: Since you use Decap, you will eventually need a way to fetch all files.
-            // For now, this assumes a single master file for testing.
-            const response = await fetch('data/family.json'); 
-            const family = await response.json();
-
-            const person = name ? family.find(p => p.name === name) : family.find(p => p.relation === 'Head');
-
-            if (!person) {
-                root.innerHTML = "<h1>Family Tree</h1><p>Person not found.</p>";
-                return;
+        async function loadFamilyData() {
+            const container = document.getElementById('tree-container');
+            try {
+                // Fetching the index file that Decap CMS often creates
+                const response = await fetch('data/family.json'); 
+                if (!response.ok) throw new Error("Could not load data.");
+                const data = await response.json();
+                
+                container.innerHTML = ""; // Clear loading message
+                data.forEach(member => {
+                    container.innerHTML += `
+                        <div class="member-card">
+                            <h3>${member.name}</h3>
+                            <p>${member.relation}</p>
+                        </div>
+                    `;
+                });
+            } catch (error) {
+                container.innerHTML = "<p>Data not found yet. Please ensure you have added a member in /admin and clicked Publish.</p>";
+                console.error("Fetch error:", error);
             }
-
-            // 2. Render the profile
-            root.innerHTML = `
-                <div class="card">
-                    <img src="${person.photo}">
-                    <h1>${person.name}</h1>
-                    <p>Role: ${person.relation}</p>
-                    <p>Spouse: ${person.spouse || 'None'}</p>
-                    <p>Father: ${person.father || 'N/A'} | Mother: ${person.mother || 'N/A'}</p>
-                </div>
-                <div class="nav">
-                    <button onclick="window.history.back()">Back</button>
-                </div>
-            `;
         }
-        renderPerson();
+        loadFamilyData();
     </script>
 </body>
 </html>
