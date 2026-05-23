@@ -1,4 +1,4 @@
-const csvUrl = 'YOUR_CSV_LINK_HERE'; // MUST end in ?output=csv
+const csvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQ5NHtG504CerQUBm-rCc1X90dmNTsx9JOzKi3uFvPWq3yXXtSUr38g-TFlAAR6gFsnvC-9LEGSANv3/pub?output=csv'; // MUST end in ?output=csv
 
 const params = new URLSearchParams(window.location.search);
 const personSlug = params.get('name');
