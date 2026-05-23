@@ -22,7 +22,7 @@ function loadFamilyTree() {
                 card.innerHTML = `
                     <h3><a href="profile.html?name=${row.Slug}">${row.NAME}</a></h3>
                     <div class="card-details">
-                        <p><strong>Spouse:</strong> ${row.SPOUSE || 'N/A'}</p>
+                        <p><strong>Spouse:</strong> ${row['NAMES 1'] || 'N/A'}</p>
                         <p><strong>Children:</strong> ${row.CHILDREN || 'None'}</p>
                         <div class="dates">
                             Born: ${row['BORN DATE'] || 'N/A'} <br>
