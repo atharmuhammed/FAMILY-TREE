@@ -42,7 +42,7 @@ Papa.parse(csvUrl, {
                 // If childData exists, we link to their profile; otherwise, just show the name
                 childBox.innerHTML = `
                     <h4>${childData ? `<a href="profile.html?name=${childData.Slug}">${childName}</a>` : childName}</h4>
-                    <p>${childData ? (childData.SPOUSE || 'No Spouse') : 'No details available'}</p>
+                    <p>${childData ? (childData['NAMES 1'] || 'No Spouse') : 'No details available'}</p>
                 `;
                 childrenContainer.appendChild(childBox);
             });
