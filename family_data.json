@@ -1,1 +1,18 @@
-
+[
+  {
+    "id": 1,
+    "name": "Grandpa Name",
+    "dob": "1940-01-01",
+    "dod": "2020-01-01",
+    "photo": "grandpa.jpg",
+    "children": [2, 3]
+  },
+  {
+    "id": 2,
+    "name": "Son Name",
+    "dob": "1965-05-05",
+    "dod": "",
+    "photo": "son.jpg",
+    "children": []
+  }
+]
