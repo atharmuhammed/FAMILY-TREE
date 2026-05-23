@@ -1,4 +1,3 @@
-// REPLACE THIS URL WITH YOUR ?output=csv LINK
 const csvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQ5NHtG504CerQUBm-rCc1X90dmNTsx9JOzKi3uFvPWq3yXXtSUr38g-TFlAAR6gFsnvC-9LEGSANv3/pub?output=csv';
 
 function loadFamilyTree() {
@@ -7,17 +6,19 @@ function loadFamilyTree() {
         header: true,
         complete: function(results) {
             const container = document.getElementById('tree-container');
-            if (!container) return; // Safety check
+            if (!container) return;
             container.innerHTML = '';
             
             results.data.forEach(row => {
+                // FILTER: This prevents non-Level 1 people from appearing on the Home Page
+                if (row.Level !== "1") return;
+
                 // Ensure there is a name to display
                 if (!row.NAME) return;
 
                 const card = document.createElement('div');
                 card.className = 'card';
                 
-                // IMPORTANT: This link points to profile.html with the person's slug
                 card.innerHTML = `
                     <h3><a href="profile.html?name=${row.Slug}">${row.NAME}</a></h3>
                     <div class="card-details">
