@@ -1,12 +1,18 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Family Tree Admin</title>
-</head>
 <body>
-  <div id="nc-root"></div>
-  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+    <h1>Our Family Tree</h1>
+    <div id="tree-container"></div>
+
+    <script>
+        // This script fetches all your data files and displays them
+        async function buildTree() {
+            const container = document.getElementById('tree-container');
+            // This is a placeholder; you will need to point this to your 
+            // folder of JSON files once you have them.
+            container.innerHTML = "<p>Data is saved in GitHub. We are now configuring the display!</p>";
+        }
+        buildTree();
+    </script>
 </body>
 </html>
