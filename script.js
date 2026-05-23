@@ -7,24 +7,31 @@ async function loadFamilyTree() {
         const rows = data.split('\n').slice(1);
         
         const container = document.getElementById('tree-container');
-        container.innerHTML = ''; // Clear container
+        container.innerHTML = ''; 
         
         rows.forEach(row => {
-            // This regex handles commas inside or outside quotes
-            const columns = row.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/);
-            if (columns.length < 7) return; 
+            // Split by comma
+            const cols = row.split(',');
+            if (cols.length < 7) return;
             
-            const [name, spouse, children, born, death, father, mother] = columns;
+            // Mapping your exact columns:
+            const name = cols[0];
+            const spouse = cols[1];
+            const born = cols[2];
+            const death = cols[3];
+            const children = cols[4];
+            const father = cols[5];
+            const mother = cols[6];
             
             if (!name) return;
 
             const card = document.createElement('div');
             card.className = 'member-card';
             card.innerHTML = `
-                <h3>${name.replace(/"/g, '')} & ${spouse ? spouse.replace(/"/g, '') : ''}</h3>
-                <p><strong>Parents:</strong> ${father ? father.replace(/"/g, '') : ''} & ${mother ? mother.replace(/"/g, '') : ''}</p>
-                <p><strong>Bio/Dates:</strong> Born: ${born ? born.replace(/"/g, '') : ''} | Died: ${death ? death.replace(/"/g, '') : ''}</p>
-                <p><strong>Children:</strong> ${children ? children.replace(/"/g, '') : ''}</p>
+                <h3>${name} & ${spouse}</h3>
+                <p><strong>Parents:</strong> ${father} & ${mother}</p>
+                <p><strong>Bio:</strong> Born: ${born} | Died: ${death}</p>
+                <p><strong>Children:</strong> ${children}</p>
             `;
             container.appendChild(card);
         });
