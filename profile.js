@@ -17,21 +17,22 @@ Papa.parse(csvUrl, {
         }
 
         container.innerHTML = `
-            <div class="top-row">
-                <div class="box">
-                    <h3>${person.NAME}</h3>
-                    <p>Born: ${person['DOB 1'] || 'N/A'}</p>
-                    <p>Passed Away: ${person['DOD 1'] || 'N/A'}</p>
-                </div>
-                <div class="box">
-                    <h3>${person['PARTNER NAME'] || 'No Partner'}</h3>
-                    <p>Partner</p>
-                    <p>Born: ${person['DOB 2'] || person['DOB 1'] || 'N/A'}</p>
-                    <p>Passed Away: ${person['DOD 2'] || 'N/A'}</p>
-                </div>
-            </div>
-            <h3 style="text-align: center;">Children</h3>
-            <div class="children-row" id="children-container"></div>
+    <div class="top-row">
+        <div class="box">
+            <h3>${person.NAME}</h3>
+            <p>Born: ${person['DOB 1'] || 'N/A'}</p>
+            <p>Passed Away: ${person['DOD 1'] || 'N/A'}</p>
+        </div>
+        <div class="box">
+            <h3>${person['PARTNER NAME'] || 'No Partner'}</h3>
+            <p>Partner</p>
+            <p>Born: ${person['DOB 2'] || person['DOB 1'] || 'N/A'}</p>
+            <p>Passed Away: ${person['DOD 2'] || 'N/A'}</p>
+        </div>
+    </div>
+    <h2 class="children-heading">Children</h2>
+    <div class="children-row" id="children-container"></div>
+`;
         `;
 
         const childrenContainer = document.getElementById('children-container');
