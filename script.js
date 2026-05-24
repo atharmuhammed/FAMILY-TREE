@@ -9,12 +9,13 @@ function loadFamilyTree() {
             container.innerHTML = '';
             
             results.data.forEach(row => {
+                // Ensure we only show Level 1
                 if (row.LEVEL && row.LEVEL.trim() == "1") {
                     const card = document.createElement('div');
-                    card.className = 'box'; // Unified class
+                    card.className = 'box'; // Using the 'box' class you wanted
                     card.innerHTML = `
                         <h3><a href="profile.html?name=${encodeURIComponent(row.NAME)}">${row.NAME}</a></h3>
-                        <div class="card-details" style="font-size: 0.9em; color: #555;">
+                        <div class="card-details">
                             <p><strong>Partner:</strong> ${row['PARTNER NAME'] || 'N/A'}</p>
                             <div class="dates">
                                 ${row['DOB 1'] ? 'Born: ' + row['DOB 1'] : ''} <br>
