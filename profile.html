@@ -1,10 +1,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
-    </head>
+    <style>
+        .box { 
+            background: white; padding: 20px; border: 2px solid #3498db; 
+            border-radius: 15px; width: 220px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); 
+            margin: 10px; display: inline-block; vertical-align: top; text-align: center;
+        }
+        .top-row { display: flex; justify-content: center; gap: 40px; }
+        .children-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; }
+    </style>
+</head>
 <body>
     <div id="profile-container"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
     <script src="profile.js"></script>
 </body>
 </html>
