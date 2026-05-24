@@ -10,6 +10,7 @@ Papa.parse(csvUrl, {
         const container = document.getElementById('profile-container');
         if (!container) return;
 
+        // Find the person
         const person = data.find(p => p.NAME && p.NAME.trim().toLowerCase() === (personName || "").trim().toLowerCase());
 
         if (!person) {
@@ -17,6 +18,7 @@ Papa.parse(csvUrl, {
             return;
         }
 
+        // Build HTML
         container.innerHTML = `
             <div class="top-row">
                 <div class="box">
@@ -41,7 +43,8 @@ Papa.parse(csvUrl, {
         if (children.length > 0) {
             children.forEach(child => {
                 const childBox = document.createElement('a');
-                childBox.className = 'box child-box';
+                // Use 'box' to maintain consistent styling
+                childBox.className = 'box'; 
                 childBox.style.textDecoration = 'none';
                 childBox.style.color = 'black';
                 childBox.href = `profile.html?name=${encodeURIComponent(child.NAME)}`;
