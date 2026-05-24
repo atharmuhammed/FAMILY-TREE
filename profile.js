@@ -29,7 +29,7 @@ Papa.parse(csvUrl, {
                 <div class="box">
                     <h3>${person['PARTNER NAME'] || 'No Partner'}</h3>
                     <p>Partner</p>
-                    <p>Born: ${person['DOB 2'] || person['DOB 1'] || 'N/A'}</p>
+                    <p>Born: ${person['DOB 2'] || 'N/A'}</p>
                     <p>Passed Away: ${person['DOD 2'] || 'N/A'}</p>
                 </div>
             </div>
