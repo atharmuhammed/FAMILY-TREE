@@ -6,11 +6,12 @@ Papa.parse(csvUrl, {
     download: true, header: true,
     complete: function(results) {
         const data = results.data;
-        const person = data.find(p => p.NAME && p.NAME.trim().toLowerCase() === personName.trim().toLowerCase());
+        // Use a simpler search: Just look for the first match regardless of extra spaces
+        const person = data.find(p => p.NAME && p.NAME.trim() === personName.trim());
         const container = document.getElementById('profile-container');
 
         if (!person) {
-            container.innerHTML = "<h1>Person not found.</h1><a href='index.html'>Back to Home</a>";
+            container.innerHTML = "<h1>Data not found for: " + personName + "</h1><a href='index.html'>Back to Home</a>";
             return;
         }
 
@@ -33,12 +34,15 @@ Papa.parse(csvUrl, {
         `;
 
         const childrenContainer = document.getElementById('children-container');
-        const children = data.filter(p => p['PARENT NAME'] && p['PARENT NAME'].trim().toLowerCase() === person.NAME.trim().toLowerCase());
+        // Simple search: Does the PARENT NAME column contain this name?
+        const children = data.filter(p => p['PARENT NAME'] && p['PARENT NAME'].trim() === person.NAME.trim());
 
         if (children.length > 0) {
             children.forEach(child => {
                 const childBox = document.createElement('a');
                 childBox.className = 'box child-box';
+                childBox.style.display = 'block'; // Ensure it renders
+                childBox.style.margin = '10px';
                 childBox.href = `profile.html?name=${encodeURIComponent(child.NAME)}`;
                 childBox.innerHTML = `
                     <h4>${child.NAME}</h4>
@@ -51,7 +55,7 @@ Papa.parse(csvUrl, {
                 childrenContainer.appendChild(childBox);
             });
         } else {
-            childrenContainer.innerHTML = "<p>No children listed.</p>";
+            childrenContainer.innerHTML = "<p>No children found. (System could not match PARENT NAME to this person)</p>";
         }
     }
 });
