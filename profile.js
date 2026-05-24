@@ -8,14 +8,17 @@ Papa.parse(csvUrl, {
     header: true,
     complete: function(results) {
         const data = results.data;
-        const person = data.find(p => p.NAME && p.NAME.trim() === personName);
+        
+        // Find the person (cleaning whitespace)
+        const person = data.find(p => p.NAME && p.NAME.trim().toLowerCase() === personName.trim().toLowerCase());
         const container = document.getElementById('profile-container');
 
         if (!person) {
-            container.innerHTML = "<h1>Person not found.</h1><a href='index.html'>Back to Home</a>";
+            container.innerHTML = "<h1>Person not found: " + personName + "</h1><a href='index.html'>Back to Home</a>";
             return;
         }
 
+        // Render Parent + Partner
         container.innerHTML = `
             <div class="top-row">
                 <div class="box">
@@ -26,16 +29,20 @@ Papa.parse(csvUrl, {
                 <div class="box">
                     <h3>${person['PARTNER NAME'] || 'No Partner'}</h3>
                     <p>Partner</p>
-                    <p>Born: ${person['DOB 2'] || 'N/A'}</p>
                 </div>
             </div>
             <h3>Children</h3>
             <div class="children-row" id="children-container"></div>
         `;
 
+        // Find children by matching PARENT NAME
         const childrenContainer = document.getElementById('children-container');
-        // Find everyone whose PARENT NAME matches this person
-        const children = data.filter(p => p['PARENT NAME'] && p['PARENT NAME'].trim() === person.NAME.trim());
+        
+        // Debug: Filter children where Parent Name matches (case insensitive)
+        const children = data.filter(p => 
+            p['PARENT NAME'] && 
+            p['PARENT NAME'].trim().toLowerCase() === person.NAME.trim().toLowerCase()
+        );
 
         if (children.length > 0) {
             children.forEach(child => {
@@ -49,7 +56,7 @@ Papa.parse(csvUrl, {
                 childrenContainer.appendChild(childBox);
             });
         } else {
-            childrenContainer.innerHTML = "<p>No children listed.</p>";
+            childrenContainer.innerHTML = "<p>No children found for " + person.NAME + ". Check spelling in Excel.</p>";
         }
     }
 });
