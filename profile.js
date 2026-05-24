@@ -6,7 +6,6 @@ Papa.parse(csvUrl, {
     download: true, header: true,
     complete: function(results) {
         const data = results.data;
-        // Search by trimming spaces to be safe
         const person = data.find(p => p.NAME && p.NAME.trim().toLowerCase() === personName.trim().toLowerCase());
         const container = document.getElementById('profile-container');
 
@@ -39,7 +38,7 @@ Papa.parse(csvUrl, {
         if (children.length > 0) {
             children.forEach(child => {
                 const childBox = document.createElement('a');
-                childBox.className = 'box'; // Force your box class here
+                childBox.className = 'box'; // This keeps the same style as parent
                 childBox.style.textDecoration = 'none';
                 childBox.href = `profile.html?name=${encodeURIComponent(child.NAME)}`;
                 childBox.innerHTML = `
