@@ -1,18 +1,29 @@
 const csvUrl = 'https://docs.google.com/spreadsheets/d/1B60ciK2qtUW1nsg7NpFEIOweo_yseqlzW6-DQRfLtgI/export?format=csv&gid=1968708823';
 
 function loadFamilyTree() {
+    // Check if Papa is loaded
+    if (typeof Papa === 'undefined') {
+        console.error("PapaParse library not loaded!");
+        return;
+    }
+
     Papa.parse(csvUrl, {
-        download: true, header: true,
+        download: true,
+        header: true,
         complete: function(results) {
             const container = document.getElementById('tree-container');
-            if (!container) return;
+            if (!container) {
+                console.error("Element with id 'tree-container' not found in your HTML.");
+                return;
+            }
             container.innerHTML = '';
             
             results.data.forEach(row => {
-                // Ensure we only show Level 1
-                if (row.LEVEL && row.LEVEL.trim() == "1") {
+                // Ensure the row has a name before creating a card
+                if (row.NAME && row.LEVEL && row.LEVEL.trim() == "1") {
                     const card = document.createElement('div');
-                    card.className = 'box'; // Using the 'box' class you wanted
+                    card.className = 'box'; 
+                    card.style.display = 'inline-block'; // Ensures box styling
                     card.innerHTML = `
                         <h3><a href="profile.html?name=${encodeURIComponent(row.NAME)}">${row.NAME}</a></h3>
                         <div class="card-details">
@@ -26,7 +37,12 @@ function loadFamilyTree() {
                     container.appendChild(card);
                 }
             });
+        },
+        error: function(err) {
+            console.error("Error parsing CSV:", err);
         }
     });
 }
-loadFamilyTree();
+
+// Run the function when the page is fully loaded
+document.addEventListener('DOMContentLoaded', loadFamilyTree);
