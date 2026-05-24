@@ -2,31 +2,28 @@ const csvUrl = 'https://docs.google.com/spreadsheets/d/1B60ciK2qtUW1nsg7NpFEIOwe
 
 function loadFamilyTree() {
     Papa.parse(csvUrl, {
-        download: true,
-        header: true,
+        download: true, header: true,
         complete: function(results) {
             const container = document.getElementById('tree-container');
             if (!container) return;
             container.innerHTML = '';
             
             results.data.forEach(row => {
-                // Only show Level 1 (Head of Family) on the Home Page
-                if (row.LEVEL != "1") return;
-                if (!row.NAME) return;
-
-                const card = document.createElement('div');
-                card.className = 'card';
-                card.innerHTML = `
-                    <h3><a href="profile.html?name=${encodeURIComponent(row.NAME)}">${row.NAME}</a></h3>
-                    <div class="card-details">
-                        <p><strong>Partner:</strong> ${row['PARTNER NAME'] || 'N/A'}</p>
-                        <div class="dates">
-                            <strong>Self:</strong> ${row['DOB 1'] || 'N/A'} - ${row['DOD 1'] || 'N/A'} <br>
-                            <strong>Partner:</strong> ${row['DOB 2'] || 'N/A'} - ${row['DOD 2'] || 'N/A'}
+                if (row.LEVEL && row.LEVEL.trim() == "1") {
+                    const card = document.createElement('div');
+                    card.className = 'box'; // Unified class
+                    card.innerHTML = `
+                        <h3><a href="profile.html?name=${encodeURIComponent(row.NAME)}">${row.NAME}</a></h3>
+                        <div class="card-details" style="font-size: 0.9em; color: #555;">
+                            <p><strong>Partner:</strong> ${row['PARTNER NAME'] || 'N/A'}</p>
+                            <div class="dates">
+                                ${row['DOB 1'] ? 'Born: ' + row['DOB 1'] : ''} <br>
+                                ${row['DOD 1'] ? 'Passed Away: ' + row['DOD 1'] : ''}
+                            </div>
                         </div>
-                    </div>
-                `;
-                container.appendChild(card);
+                    `;
+                    container.appendChild(card);
+                }
             });
         }
     });
