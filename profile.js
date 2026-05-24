@@ -2,20 +2,23 @@ const csvUrl = 'https://docs.google.com/spreadsheets/d/1B60ciK2qtUW1nsg7NpFEIOwe
 const params = new URLSearchParams(window.location.search);
 const personName = params.get('name');
 
-Papa.parse(csvUrl, {
-    download: true, header: true,
-    complete: function(results) {
-        console.log("Data loaded:", results.data.length, "rows");
+// Using standard fetch to bypass potential PapaParse CSP issues if necessary
+fetch(csvUrl)
+    .then(response => response.text())
+    .then(csvText => {
+        const results = Papa.parse(csvText, { header: true });
         const data = results.data;
-        const person = data.find(p => p.NAME && p.NAME.trim().toLowerCase() === personName.trim().toLowerCase());
         const container = document.getElementById('profile-container');
+        
+        if (!container) return;
+
+        const person = data.find(p => p.NAME && p.NAME.trim().toLowerCase() === (personName || "").trim().toLowerCase());
 
         if (!person) {
-            container.innerHTML = "<h1>Person not found.</h1>";
+            container.innerHTML = "<h1>Person not found.</h1><a href='index.html'>Back to Home</a>";
             return;
         }
 
-        // Build the structure
         container.innerHTML = `
             <div class="top-row">
                 <div class="box">
@@ -40,7 +43,7 @@ Papa.parse(csvUrl, {
         if (children.length > 0) {
             children.forEach(child => {
                 const childBox = document.createElement('a');
-                childBox.className = 'box'; // SAME CLASS AS PARENTS
+                childBox.className = 'box';
                 childBox.style.textDecoration = 'none';
                 childBox.href = `profile.html?name=${encodeURIComponent(child.NAME)}`;
                 childBox.innerHTML = `
@@ -56,8 +59,8 @@ Papa.parse(csvUrl, {
         } else {
             childrenContainer.innerHTML = "<p>No children listed.</p>";
         }
-    },
-    error: function(err) {
-        console.error("CSV Parse Error:", err);
-    }
-});
+    })
+    .catch(err => {
+        console.error("Error loading data:", err);
+        document.getElementById('profile-container').innerHTML = "<h1>Error loading family data.</h1>";
+    });
