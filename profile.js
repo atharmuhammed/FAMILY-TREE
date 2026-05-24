@@ -19,13 +19,13 @@ Papa.parse(csvUrl, {
                 <div class="box">
                     <h3>${person.NAME}</h3>
                     <p>Born: ${person['DOB 1'] || 'N/A'}</p>
-                    <p>Died: ${person['DOD 1'] || 'N/A'}</p>
+                    <p>Passed Away: ${person['DOD 1'] || 'N/A'}</p>
                 </div>
                 <div class="box">
                     <h3>${person['PARTNER NAME'] || 'No Partner'}</h3>
                     <p>Partner</p>
                     <p>Born: ${person['DOB 2'] || 'N/A'}</p>
-                    <p>Died: ${person['DOD 2'] || 'N/A'}</p>
+                    <p>Passed Away: ${person['DOD 2'] || 'N/A'}</p>
                 </div>
             </div>
             <h3>Children</h3>
@@ -33,7 +33,6 @@ Papa.parse(csvUrl, {
         `;
 
         const childrenContainer = document.getElementById('children-container');
-        // This matches the PARENT NAME column to the person's NAME
         const children = data.filter(p => p['PARENT NAME'] && p['PARENT NAME'].trim().toLowerCase() === person.NAME.trim().toLowerCase());
 
         if (children.length > 0) {
@@ -44,6 +43,10 @@ Papa.parse(csvUrl, {
                 childBox.innerHTML = `
                     <h4>${child.NAME}</h4>
                     <p>Partner: ${child['PARTNER NAME'] || 'None'}</p>
+                    <div style="font-size: 0.8em; color: #666;">
+                        ${child['DOB 1'] ? 'Born: ' + child['DOB 1'] : ''} <br>
+                        ${child['DOD 1'] ? 'Passed Away: ' + child['DOD 1'] : ''}
+                    </div>
                 `;
                 childrenContainer.appendChild(childBox);
             });
