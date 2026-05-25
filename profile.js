@@ -18,7 +18,7 @@ Papa.parse(csvUrl, {
             return;
         }
 
-        // Build HTML with the new tree-container wrapper for the flowchart lines
+        // Build HTML with the h2 moved OUTSIDE the tree-container
         container.innerHTML = `
             <div class="top-row">
                 <div class="box">
@@ -45,7 +45,6 @@ Papa.parse(csvUrl, {
         if (children.length > 0) {
             children.forEach(child => {
                 const childBox = document.createElement('a');
-                // Use 'box' to maintain consistent styling
                 childBox.className = 'box'; 
                 childBox.style.textDecoration = 'none';
                 childBox.style.color = 'black';
