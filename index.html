@@ -3,6 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <title>MASTER ABDUL GAFFAR SULLIA</title>
+    
+    <script>
+        function checkPassword() {
+            var password = prompt("Please enter the password to view this page:");
+            // Replace 'YOUR_PASSWORD_HERE' with your desired password
+            if (password !== "AGS1922") {
+                alert("Incorrect password! Access denied.");
+                window.location.href = "about:blank"; 
+            }
+        }
+        checkPassword();
+    </script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
     <style>
         body { 
