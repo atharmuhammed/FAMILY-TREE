@@ -2,7 +2,14 @@
 <html>
 <head>
     <style>
-        body { font-family: sans-serif; padding: 20px; background-color: #f9f9f9; }
+        body { 
+            font-family: sans-serif; 
+            padding: 20px; 
+            background-color: #f9f9f9; 
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh; /* Ensures the page takes at least the full height */
+        }
         
         /* Box styling */
         .box { 
@@ -31,18 +38,25 @@
         }
 
         .children-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; }
+
+        /* Footer styling */
+        .site-footer {
+            margin-top: auto; /* Pushes the footer to the bottom */
+            text-align: right;
+            padding: 20px;
+            color: #777;
+            font-size: 0.8em;
+            border-top: 1px solid #eee;
+        }
     </style>
 </head>
 <body>
     <div id="profile-container"></div>
-    <div id="profile-container"></div>
 
-    <footer style="text-align: center; margin-top: 50px; padding: 20px; color: #777; font-size: 0.9em; border-top: 1px solid #eee;">
+    <footer class="site-footer">
         <p>&copy; 2026 ATHAR MUHAMMED. All rights reserved.</p>
     </footer>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
-    <script src="profile.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
     <script src="profile.js"></script>
 </body>
