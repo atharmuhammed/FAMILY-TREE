@@ -10,19 +10,9 @@
             display: flex; flex-direction: column; min-height: 100vh; margin: 0;
         }
         
-        /* Updated Gallery Section */
-        .gallery-container { 
-            display: flex; align-items: center; justify-content: center; 
-            gap: 25px; margin: 40px 0; flex-wrap: wrap; 
-        }
-        .hero-img { 
-            width: 200px; height: 200px; object-fit: cover; 
-            border-radius: 50%; border: 4px solid #3498db; 
-        }
-        .book-img { 
-            width: 120px; height: 160px; object-fit: cover; 
-            border-radius: 5px; border: 2px solid #3498db; 
-        }
+        .header-section { display: flex; align-items: center; justify-content: center; gap: 40px; margin-bottom: 40px; }
+        .hero-img { width: 200px; height: 200px; object-fit: cover; border-radius: 50%; border: 4px solid #3498db; }
+        .book-img { width: 120px; height: 160px; object-fit: cover; border-radius: 5px; border: 2px solid #3498db; }
         
         .box { 
             background: white; padding: 20px; border: 2px solid #3498db; 
@@ -31,7 +21,7 @@
         }
         .tree-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; }
         .box a { color: #3498db; text-decoration: none; font-weight: bold; }
-        
+
         .site-footer {
             margin-top: auto; text-align: right; padding: 20px; 
             color: #000000; font-weight: bold; font-size: 0.9em; border-top: 2px solid #000;
@@ -40,28 +30,41 @@
 </head>
 <body>
 
-    <div class="gallery-container">
-        <div style="text-align: center;">
-            <img src="HAJJ GUIDE.jpeg" alt="Hajj Guide" class="book-img">
-        </div>
+    <div class="header-section">
+        <img src="HAJJ GUIDE.jpeg" alt="Hajj Guide" class="book-img">
         
         <div style="text-align: center;">
             <img src="abdul_gaffar.jpg" alt="Master Abdul Gaffar Sullia" class="hero-img">
-            <h1 style="margin-top: 10px;">MASTER ABDUL GAFFAR SULLIA</h1>
+            <h1>MASTER ABDUL GAFFAR SULLIA</h1>
         </div>
 
-        <div style="text-align: center;">
-            <img src="NANDA DEEPA.jpeg" alt="Nanda Deepa" class="book-img">
-        </div>
+        <img src="NANDA DEEPA.jpeg" alt="Nanda Deepa" class="book-img">
     </div>
 
     <div id="tree-container" class="tree-container"></div>
 
     <div class="bio-section" style="max-width: 800px; margin: 40px auto; padding: 20px; background: white; border-radius: 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
         <h2 style="text-align: center;">BIOGRAPHY OF ABDUL GAFFAR SULLIA (1922- 1998) </h2>
-        <p>Born in Mangalore in 1922, Abdul Gaffar Sullia was a distinguished educator, religious scholar, and polyglot...</p>
-        </div>
-    
+        <p>Born in Mangalore in 1922, Abdul Gaffar Sullia was a distinguished educator, religious scholar, and polyglot. Throughout his career, he served concurrently as a school teacher and an Imam, demonstrating a profound commitment to both academic and spiritual guidance. He was also a founding member of the Sanmarga weekly publication.
+        A highly accomplished linguist, Mr. Sullia was proficient in English, Hindi, Urdu, Arabic, Persian, Malayalam, Tulu, and Beary. He leveraged his linguistic expertise to write and translate numerous influential treatises on a wide variety of subjects. He passed away in 1998 at the age of 76.</p>
+        
+        <h3 style="text-align: left;">Literary Contributions:</h3>
+        <ul style="text-align: left; line-height: 1.6;"> 
+            <li>1. Qur’an Kannada Anuvada (1978): A translation of the Quran into Kannada.</li>
+            <li>2. Hajj Guide (1975): A comprehensive guide for pilgrims.</li>
+            <li>3. Urdu Kannada Shabdakosha (1984): A dictionary bridging Urdu and Kannada.</li>
+            <li>4. Parda: A translation focusing on the concept of modesty.</li>
+            <li>5. Khutubat: A translation of various religious sermons.</li>
+            <li>6. Analagni: A literary work addressing the social issue of dowry.</li>
+            <li>7. Kare Needu Kanda: A collection of religious poetry.</li>
+            <li>8. Nandadeepa: A collection of religious poetry.</li>
+            <li>9. Zakath: A treatise on the principles of Islamic charity.</li>
+            <li>10. Namaz Mattu Upavasa Vratha: A treatise on the practices of prayer and fasting.</li>
+        </ul>
+
+        <p>Abdul Gaffar Sullia’s life was defined by his unwavering dedication to knowledge, faith, and community service. By bridging cultural and linguistic divides, he left behind a rich intellectual legacy. Today, his extensive body of work continues to serve as an invaluable resource for those seeking a deeper understanding of religious principles and social ethics, ensuring his influence endures for generations to come.</p>
+    </div>
+
     <script src="script.js"></script>
     
     <footer class="site-footer">
