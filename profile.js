@@ -37,7 +37,7 @@ Papa.parse(csvUrl, {
             <div class="children-row" id="children-container"></div>
         `;
 
-        const childrenContainer = document.getElementById('children-container');
+        const childrenContainer = document.getElementById('children-section');
         const children = data.filter(p => p['PARENT NAME'] && p['PARENT NAME'].trim().toLowerCase() === person.NAME.trim().toLowerCase());
 
         if (children.length > 0) {
