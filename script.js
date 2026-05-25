@@ -22,8 +22,8 @@ function loadFamilyTree() {
                 // Ensure the row has a name before creating a card
                 if (row.NAME && row.LEVEL && row.LEVEL.trim() == "1") {
                     const card = document.createElement('div');
+                    // This class 'box' connects to the CSS styling
                     card.className = 'box'; 
-                    card.style.display = 'inline-block'; // Ensures box styling
                     card.innerHTML = `
                         <h3><a href="profile.html?name=${encodeURIComponent(row.NAME)}">${row.NAME}</a></h3>
                         <div class="card-details">
