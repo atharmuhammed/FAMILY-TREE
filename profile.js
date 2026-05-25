@@ -18,7 +18,7 @@ Papa.parse(csvUrl, {
             return;
         }
 
-        // Build HTML
+        // Build HTML with the new tree-container wrapper for the flowchart lines
         container.innerHTML = `
             <div class="top-row">
                 <div class="box">
@@ -34,7 +34,9 @@ Papa.parse(csvUrl, {
                 </div>
             </div>
             <h2 class="children-heading">Children</h2>
-            <div class="children-row" id="children-container"></div>
+            <div class="tree-container">
+                <div class="children-row" id="children-section"></div>
+            </div>
         `;
 
         const childrenContainer = document.getElementById('children-section');
