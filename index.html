@@ -14,6 +14,9 @@
         .hero-img { width: 200px; height: 200px; object-fit: cover; border-radius: 50%; border: 4px solid #3498db; }
         .book-img { width: 120px; height: 160px; object-fit: cover; border-radius: 5px; border: 2px solid #3498db; }
         
+        /* Larger size for the Quran book */
+        .large-book-img { width: 150px; height: 200px; object-fit: cover; border-radius: 5px; border: 2px solid #3498db; }
+        
         .box { 
             background: white; padding: 20px; border: 2px solid #3498db; 
             border-radius: 15px; width: 220px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); 
@@ -31,14 +34,17 @@
 <body>
 
     <div class="header-section">
-        <img src="HAJJ GUIDE.jpeg" alt="Hajj Guide" class="book-img">
+        <img src="QURAN TRANSLATION.jpeg" alt="Quran Translation" class="large-book-img">
         
         <div style="text-align: center;">
             <img src="abdul_gaffar.jpg" alt="Master Abdul Gaffar Sullia" class="hero-img">
             <h1>MASTER ABDUL GAFFAR SULLIA</h1>
         </div>
 
-        <img src="NANDA DEEPA.jpeg" alt="Nanda Deepa" class="book-img">
+        <div style="display: flex; gap: 20px;">
+            <img src="HAJJ GUIDE.jpeg" alt="Hajj Guide" class="book-img">
+            <img src="NANDA DEEPA.jpeg" alt="Nanda Deepa" class="book-img">
+        </div>
     </div>
 
     <div id="tree-container" class="tree-container"></div>
