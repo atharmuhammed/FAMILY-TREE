@@ -41,7 +41,7 @@
             flex-wrap: wrap; 
             justify-content: center; 
             gap: 20px; 
-            margin-top: 20px;
+            margin-top: 0; /* Changed from 20px to 0 to keep lines connected */
         }
 
         /* Flowchart line styles */
@@ -49,8 +49,8 @@
             display: flex;
             justify-content: center;
             position: relative;
-            padding-top: 50px;
-            margin-top: 20px;
+            padding-top: 25px; /* Reduced to align with the vertical line */
+            margin-top: 0;
         }
 
         .tree-container::before {
@@ -59,17 +59,17 @@
             top: 0;
             left: 50%;
             width: 2px;
-            height: 50px;
+            height: 25px; /* Matches the padding-top above */
             background: #3498db;
         }
 
         .box::before {
             content: '';
             position: absolute;
-            top: -20px;
+            top: -25px; /* Adjust this value to close the gap */
             left: 50%;
             width: 2px;
-            height: 20px;
+            height: 25px; /* Matches the vertical gap height */
             background: #3498db;
         }
     </style>
