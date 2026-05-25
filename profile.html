@@ -16,6 +16,7 @@
             display: inline-block; 
             vertical-align: top; 
             text-align: center;
+            position: relative; /* Required for connector lines */
         }
 
         /* Large heading for Children */
@@ -41,6 +42,35 @@
             justify-content: center; 
             gap: 20px; 
             margin-top: 20px;
+        }
+
+        /* Flowchart line styles */
+        .tree-container {
+            display: flex;
+            justify-content: center;
+            position: relative;
+            padding-top: 50px;
+            margin-top: 20px;
+        }
+
+        .tree-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 2px;
+            height: 50px;
+            background: #3498db;
+        }
+
+        .box::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            width: 2px;
+            height: 20px;
+            background: #3498db;
         }
     </style>
 </head>
