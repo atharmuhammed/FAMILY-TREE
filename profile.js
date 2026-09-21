@@ -27,7 +27,7 @@ Papa.parse(csvUrl, {
                     <p>Passed Away: ${person['DOD 1'] || 'N/A'}</p>
                 </div>
                 <div class="box">
-                    <h3>${person['SPOUSE NAME'] || 'No Spouse '}</h3>
+                    <h3>${person['PARTNER NAME'] || 'No Partner '}</h3>
                     <p>Partner</p>
                     <p>Born: ${person['DOB 2'] || 'N/A'}</p>
                     <p>Passed Away: ${person['DOD 2'] || 'N/A'}</p>
@@ -51,7 +51,7 @@ Papa.parse(csvUrl, {
                 childBox.href = `profile.html?name=${encodeURIComponent(child.NAME)}`;
                 childBox.innerHTML = `
                     <h4>${child.NAME}</h4>
-                    <p>Partner: ${child['SPOUSE NAME'] || 'None'}</p>
+                    <p>Partner: ${child['PARTNER NAME'] || 'None'}</p>
                     <div style="font-size: 0.9em; color: #444;">
                         ${child['DOB 1'] ? 'Born: ' + child['DOB 1'] : ''} <br>
                         ${child['DOD 1'] ? 'Passed Away: ' + child['DOD 1'] : ''}
