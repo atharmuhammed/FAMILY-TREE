@@ -51,7 +51,7 @@ Papa.parse(csvUrl, {
                 childBox.href = `profile.html?name=${encodeURIComponent(child.NAME)}`;
                 childBox.innerHTML = `
                     <h4>${child.NAME}</h4>
-                    <p>spouse: ${child['SPOUSE NAME'] || 'None'}</p>
+                    <p>Spouse: ${child['SPOUSE NAME'] || 'None'}</p>
                     <div style="font-size: 0.9em; color: #444;">
                         ${child['DOB 1'] ? 'Born: ' + child['DOB 1'] : ''} <br>
                         ${child['DOD 1'] ? 'Passed Away: ' + child['DOD 1'] : ''}
